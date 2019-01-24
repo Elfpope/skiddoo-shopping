@@ -1,0 +1,14 @@
+### Binary ###
+bin/
+target/
+*.class
+
+### Eclipse ###
+local.properties
+.settings/
+.project
+.classpath
+
+### Others ###
+.cache-main
+.cache-tests
