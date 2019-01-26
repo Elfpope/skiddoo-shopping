@@ -1,6 +1,6 @@
 // Copyright 2015 Skiddoo Pty Ltd
 
-package au.com.skiddoo.shopping;
+package au.com.skiddoo.shopping.model;
 
 /**
  * @author jaiew

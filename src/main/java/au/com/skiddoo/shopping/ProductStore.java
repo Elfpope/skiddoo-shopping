@@ -2,8 +2,10 @@
 
 package au.com.skiddoo.shopping;
 
+import au.com.skiddoo.shopping.model.Product;
+
 /**
- * @author jaiew
+ * @author junfeng
  */
 public interface ProductStore {
 

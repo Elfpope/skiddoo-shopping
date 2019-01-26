@@ -2,13 +2,15 @@
 
 package au.com.skiddoo.shopping;
 
+import au.com.skiddoo.shopping.model.Price;
+
 /**
- * @author jaiew
+ * @author junfeng
  */
 public interface CheckoutRegister {
 
-    void read(String sku);
+	void read(String sku);
 
-    Price total();
+	Price total();
 
 }

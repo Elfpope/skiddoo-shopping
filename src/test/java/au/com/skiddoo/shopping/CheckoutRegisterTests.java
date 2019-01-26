@@ -2,17 +2,22 @@
 
 package au.com.skiddoo.shopping;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author jaiew
+ * @author junfeng
  */
 public class CheckoutRegisterTests {
 
+	@Before
+	public void setup() {
+
+	}
+
 	@Test
 	public void test() {
-		// throw new UnsupportedOperationException("Tests need to be
-		// implemented");
+
 	}
 
 }
