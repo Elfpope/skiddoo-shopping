@@ -8,6 +8,8 @@ import au.com.skiddoo.shopping.model.SKU;
 import au.com.skiddoo.shopping.util.Constants;
 
 /**
+ * It provides an implementation for the {@link PricingRule} associated with the Ipad.
+ * 
  * @author junfeng
  */
 public class IpadPricingRule implements PricingRule {
@@ -23,7 +25,7 @@ public class IpadPricingRule implements PricingRule {
 	/**
 	 * Get a singleton instance using lazy initialization.
 	 * 
-	 * @return
+	 * @return a singleton instance
 	 */
 	public static IpadPricingRule getInstance() {
 		if (instance == null) {
@@ -53,6 +55,13 @@ public class IpadPricingRule implements PricingRule {
 		return new Price(adjustment);
 	}
 
+	/**
+	 * Check if the given {@link Product} is an Ipad.
+	 * 
+	 * @param product
+	 *            to check
+	 * @return {@code true} if the given {@link Product} is an Ipad; otherwise {@code false}
+	 */
 	private boolean isIpad(Product product) {
 		return SKU.IPAD.getLabel().equals(product.getSku());
 	}

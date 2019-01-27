@@ -8,6 +8,8 @@ import au.com.skiddoo.shopping.model.Product;
 import au.com.skiddoo.shopping.pricing.PricingRule;
 
 /**
+ * It provides an implementation to {@link CheckoutRegister}.
+ * 
  * @author junfeng
  */
 public class CheckoutRegisterImpl implements CheckoutRegister {
@@ -18,21 +20,29 @@ public class CheckoutRegisterImpl implements CheckoutRegister {
 
 	private List<Product> scannedProducts;
 
+	/**
+	 * Constructor with parameters.
+	 */
 	public CheckoutRegisterImpl(List<PricingRule> pricingRules, ProductStore products) {
 		this.pricingRules = pricingRules;
 		this.products = products;
 		scannedProducts = new ArrayList<>();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void read(String sku) {
 		Product product = products.getProduct(sku);
 		if (product != null) {
 			scannedProducts.add(product);
 		}
-
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Price total() {
 		double preAdjustedTotal = scannedProducts.stream().mapToDouble(product -> product.getPrice().getAmount()).sum();
@@ -46,5 +56,4 @@ public class CheckoutRegisterImpl implements CheckoutRegister {
 
 		return new Price(preAdjustedTotal + adjustments);
 	}
-
 }

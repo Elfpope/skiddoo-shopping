@@ -8,6 +8,8 @@ import au.com.skiddoo.shopping.model.SKU;
 import au.com.skiddoo.shopping.util.Constants;
 
 /**
+ * It provides an implementation for the {@link PricingRule} associated with the Apple TV.
+ * 
  * @author junfeng
  */
 public class AppleTvPricingRule implements PricingRule {
@@ -24,7 +26,7 @@ public class AppleTvPricingRule implements PricingRule {
 	/**
 	 * Get a singleton instance using lazy initialization.
 	 * 
-	 * @return
+	 * @return a singleton instance
 	 */
 	public static AppleTvPricingRule getInstance() {
 		if (instance == null) {
@@ -34,16 +36,19 @@ public class AppleTvPricingRule implements PricingRule {
 		return instance;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Price getAdjustment(List<Product> scannedProducts) {
-		if (scannedProducts == null || scannedProducts.isEmpty()) {
+	public Price getAdjustment(List<Product> products) {
+		if (products == null || products.isEmpty()) {
 			return new Price(0);
 		}
 
 		double adjustment = 0;
-		long numOfAppleTv = scannedProducts.stream().filter(this::isAppleTv).count();
+		long numOfAppleTv = products.stream().filter(this::isAppleTv).count();
 		if (numOfAppleTv >= Constants.NUM_OF_PURCHASE_FOR_APPLE_TV_DEAL) {
-			Product appleTv = scannedProducts.stream().filter(this::isAppleTv).findFirst().get();
+			Product appleTv = products.stream().filter(this::isAppleTv).findFirst().get();
 			double adjustmentUnit = appleTv.getPrice().getAmount();
 
 			long numOfAdjustment = numOfAppleTv / Constants.NUM_OF_PURCHASE_FOR_APPLE_TV_DEAL;
@@ -53,6 +58,13 @@ public class AppleTvPricingRule implements PricingRule {
 		return new Price(adjustment);
 	}
 
+	/**
+	 * Check if the given {@link Product} is an Apple TV.
+	 * 
+	 * @param product
+	 *            to check
+	 * @return {@code true} if the given {@link Product} is an Apple TV; otherwise {@code false}
+	 */
 	private boolean isAppleTv(Product product) {
 		return SKU.APPLE_TV.getLabel().equals(product.getSku());
 	}

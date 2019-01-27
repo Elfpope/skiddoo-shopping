@@ -24,6 +24,9 @@ public class TestMacbookPricingRule {
 
 	private CheckoutRegister register;
 
+	/**
+	 * Set up the {@link CheckoutRegister} with {@link MacbookPricingRule} before any test.
+	 */
 	@Before
 	public void setup() {
 		List<PricingRule> rules = Arrays.asList(MacbookPricingRule.getInstance());

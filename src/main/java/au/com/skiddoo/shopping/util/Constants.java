@@ -1,6 +1,8 @@
 package au.com.skiddoo.shopping.util;
 
 /**
+ * It contains all constant values used in the application.
+ * 
  * @author junfeng
  */
 public abstract class Constants {

@@ -26,6 +26,9 @@ public class CheckoutRegisterTests {
 
 	private CheckoutRegister register;
 
+	/**
+	 * Set up the {@link CheckoutRegister} with all available {@link PricingRule}s before any test.
+	 */
 	@Before
 	public void setup() {
 		List<PricingRule> rules = Arrays.asList(AppleTvPricingRule.getInstance(), IpadPricingRule.getInstance(),

@@ -6,6 +6,8 @@ import au.com.skiddoo.shopping.model.SKU;
 import au.com.skiddoo.shopping.util.Constants;
 
 /**
+ * It provides an implementation to {@link ProductStore}.
+ * 
  * @author junfeng
  */
 public class ProductStoreImpl implements ProductStore {
@@ -22,7 +24,7 @@ public class ProductStoreImpl implements ProductStore {
 	/**
 	 * Get a singleton instance using lazy initialization.
 	 * 
-	 * @return
+	 * @return a singleton instance
 	 */
 	public static ProductStoreImpl getInstance() {
 		if (instance == null) {
@@ -32,19 +34,29 @@ public class ProductStoreImpl implements ProductStore {
 		return instance;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Product getProduct(String productSku) {
 		SKU sku = null;
 		try {
 			sku = SKU.valueOf(productSku);
-		} catch (IllegalArgumentException exception) {
+		} catch (IllegalArgumentException | NullPointerException exception) {
 			sku = SKU.UNKNOWN;
 		}
 
 		return getProduct(sku);
 	}
 
-	public Product getProduct(SKU sku) {
+	/**
+	 * Get a {@link Product} matching the given {@link SKU}.
+	 * 
+	 * @param sku
+	 *            used to check against the store category
+	 * @return a {@link Product} matching the given {@link SKU}
+	 */
+	private Product getProduct(SKU sku) {
 		Product result = null;
 		switch (sku) {
 			case IPAD:

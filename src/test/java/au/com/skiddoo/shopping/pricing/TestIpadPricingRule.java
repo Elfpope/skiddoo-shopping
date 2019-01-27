@@ -24,6 +24,9 @@ public class TestIpadPricingRule {
 
 	private CheckoutRegister register;
 
+	/**
+	 * Set up the {@link CheckoutRegister} with {@link IpadPricingRule} before any test.
+	 */
 	@Before
 	public void setup() {
 		List<PricingRule> rules = Arrays.asList(IpadPricingRule.getInstance());

@@ -24,6 +24,9 @@ public class TestAppleTvPricingRule {
 
 	private CheckoutRegister register;
 
+	/**
+	 * Set up the {@link CheckoutRegister} with {@link AppleTvPricingRule} before any test.
+	 */
 	@Before
 	public void setup() {
 		List<PricingRule> rules = Arrays.asList(AppleTvPricingRule.getInstance());
