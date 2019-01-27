@@ -19,7 +19,14 @@ public class Price {
 		return amount;
 	}
 
-	// TODO: remove it if not needed
+	/**
+	 * Compare with the given {@link Price} if both are equal.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Price && toString().equals(String.valueOf(obj));
+	}
+
 	@Override
 	public String toString() {
 		return String.format(Constants.PRICE_FORMAT_PATTERN, amount);

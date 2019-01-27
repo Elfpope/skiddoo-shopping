@@ -5,12 +5,31 @@ import java.util.List;
 import au.com.skiddoo.shopping.model.Price;
 import au.com.skiddoo.shopping.model.Product;
 import au.com.skiddoo.shopping.model.SKU;
-import au.com.skiddoo.shopping.util.Constants;
 
 /**
  * @author junfeng
  */
 public class MacbookPricingRule implements PricingRule {
+
+	private static MacbookPricingRule instance;
+
+	/**
+	 * Singleton class constructor
+	 */
+	private MacbookPricingRule() {
+	}
+
+	/**
+	 * Get a singleton instance using lazy initialization.
+	 * 
+	 * @return
+	 */
+	public static MacbookPricingRule getInstance() {
+		if (instance == null) {
+			instance = new MacbookPricingRule();
+		}
+		return instance;
+	}
 
 	@Override
 	public Price getAdjustment(List<Product> scannedProducts) {
@@ -31,11 +50,6 @@ public class MacbookPricingRule implements PricingRule {
 		}
 
 		return new Price(adjustment);
-	}
-
-	@Override
-	public int getAdjustmentFactor() {
-		return Constants.NEGATIVE_ADJUSTMENT_FACTOR;
 	}
 
 	private boolean isMacbookPro(Product product) {

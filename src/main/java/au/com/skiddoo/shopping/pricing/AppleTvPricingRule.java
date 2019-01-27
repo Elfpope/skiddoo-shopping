@@ -12,7 +12,27 @@ import au.com.skiddoo.shopping.util.Constants;
  */
 public class AppleTvPricingRule implements PricingRule {
 
-	private static final int NUM_OF_PURCHASE_FOR_A_DEAL = 3;
+	private static AppleTvPricingRule instance;
+
+	/**
+	 * Singleton class constructor
+	 */
+	private AppleTvPricingRule() {
+
+	}
+
+	/**
+	 * Get a singleton instance using lazy initialization.
+	 * 
+	 * @return
+	 */
+	public static AppleTvPricingRule getInstance() {
+		if (instance == null) {
+			instance = new AppleTvPricingRule();
+		}
+
+		return instance;
+	}
 
 	@Override
 	public Price getAdjustment(List<Product> scannedProducts) {
@@ -22,20 +42,15 @@ public class AppleTvPricingRule implements PricingRule {
 
 		double adjustment = 0;
 		long numOfAppleTv = scannedProducts.stream().filter(this::isAppleTv).count();
-		if (numOfAppleTv >= NUM_OF_PURCHASE_FOR_A_DEAL) {
+		if (numOfAppleTv >= Constants.NUM_OF_PURCHASE_FOR_APPLE_TV_DEAL) {
 			Product appleTv = scannedProducts.stream().filter(this::isAppleTv).findFirst().get();
 			double adjustmentUnit = appleTv.getPrice().getAmount();
 
-			long numOfAdjustment = numOfAppleTv % NUM_OF_PURCHASE_FOR_A_DEAL;
+			long numOfAdjustment = numOfAppleTv / Constants.NUM_OF_PURCHASE_FOR_APPLE_TV_DEAL;
 			adjustment = adjustmentUnit * numOfAdjustment * getAdjustmentFactor();
 		}
 
 		return new Price(adjustment);
-	}
-
-	@Override
-	public int getAdjustmentFactor() {
-		return Constants.NEGATIVE_ADJUSTMENT_FACTOR;
 	}
 
 	private boolean isAppleTv(Product product) {

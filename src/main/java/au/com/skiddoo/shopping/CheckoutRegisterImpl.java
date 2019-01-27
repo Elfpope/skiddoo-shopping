@@ -41,6 +41,9 @@ public class CheckoutRegisterImpl implements CheckoutRegister {
 				.mapToDouble(rule -> rule.getAdjustment(scannedProducts).getAmount())
 				.sum();
 
+		// clear the register once all scanned products are summed up
+		scannedProducts.clear();
+
 		return new Price(preAdjustedTotal + adjustments);
 	}
 

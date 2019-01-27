@@ -5,9 +5,10 @@ package au.com.skiddoo.shopping.model;
  */
 public enum SKU {
 	IPAD("ipad"),
-	MACBOOK_PRO("macbookpro"),
 	APPLE_TV("appletv"),
-	HDMI_ADAPTER("hdmiadapter");
+	MACBOOK_PRO("macbookpro"),
+	HDMI_ADAPTER("hdmiadapter"),
+	UNKNOWN("unknown");
 
 	private final String label;
 

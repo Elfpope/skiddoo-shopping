@@ -12,10 +12,29 @@ import au.com.skiddoo.shopping.util.Constants;
  */
 public class IpadPricingRule implements PricingRule {
 
-	private static final int NUM_OF_PURCHASE_FOR_A_DEAL = 4;
+	private static IpadPricingRule instance;
 
-	private static final double DISCOUNTED_IPAD_PRICE = 499.99;
+	/**
+	 * Singleton class constructor
+	 */
+	private IpadPricingRule() {
+	}
 
+	/**
+	 * Get a singleton instance using lazy initialization.
+	 * 
+	 * @return
+	 */
+	public static IpadPricingRule getInstance() {
+		if (instance == null) {
+			instance = new IpadPricingRule();
+		}
+		return instance;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Price getAdjustment(List<Product> scannedProducts) {
 		if (scannedProducts == null || scannedProducts.isEmpty()) {
@@ -24,19 +43,14 @@ public class IpadPricingRule implements PricingRule {
 
 		double adjustment = 0;
 		long numOfIpads = scannedProducts.stream().filter(this::isIpad).count();
-		if (numOfIpads >= NUM_OF_PURCHASE_FOR_A_DEAL) {
+		if (numOfIpads >= Constants.NUM_OF_PURCHASE_FOR_IPAD_DEAL) {
 			Product ipad = scannedProducts.stream().filter(this::isIpad).findFirst().get();
-			double adjustmentUnit = ipad.getPrice().getAmount() - DISCOUNTED_IPAD_PRICE;
+			double adjustmentUnit = ipad.getPrice().getAmount() - Constants.DISCOUNTED_IPAD_PRICE;
 
 			adjustment = adjustmentUnit * numOfIpads * getAdjustmentFactor();
 		}
 
 		return new Price(adjustment);
-	}
-
-	@Override
-	public int getAdjustmentFactor() {
-		return Constants.NEGATIVE_ADJUSTMENT_FACTOR;
 	}
 
 	private boolean isIpad(Product product) {
