@@ -11,7 +11,7 @@ This is a coding test from Skiddoo.
 - clone the project to a folder from the git repository
 - run below command in the above project folder to generate IDE required setting (ONLY for Eclipse)
 ```
-sbt eclipse
+	sbt eclipse
 ```
 - use sbt shell to compile the project 
 - import the project into IDE and add Scala Library to build path
